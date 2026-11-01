@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BroadcastChannel in 3 lines</title>
+</head>
+<body>
+  <h1>BroadcastChannel in 3 lines</h1>
+  <button id="send">Send LOGOUT to other tabs</button>
+  <pre id="out">Open this page in two tabs, then click the button.</pre>
+
+  <script>
+    // The three lines from the video:
+    const channel = new BroadcastChannel('app-sync');
+    document.getElementById('send').onclick = () => channel.postMessage({ type: 'LOGOUT' });
+    channel.onmessage = (event) => {
+      document.getElementById('out').textContent = 'Received: ' + JSON.stringify(event.data);
+    };
+  </script>
+</body>
+</html>

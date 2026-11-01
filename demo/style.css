@@ -1,0 +1,113 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f5fa;
+  --surface: #ffffff;
+  --text: #151a2c;
+  --muted: #5d6580;
+  --line: #dfe2ee;
+  --accent: #3b6df0;
+  --accent-text: #ffffff;
+  --violet: #7c4dff;
+  --log-bg: #eceefa;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #090b13;
+  --surface: #11152a;
+  --text: #e8ebfa;
+  --muted: #8f98bd;
+  --line: #222849;
+  --accent: #5b8cff;
+  --accent-text: #060913;
+  --violet: #9a7bff;
+  --log-bg: #0c0f1f;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 16px/1.5 var(--font);
+  background: var(--bg);
+  color: var(--text);
+  transition: background .25s, color .25s;
+}
+h1, h2 { margin: 0; line-height: 1.2; }
+h1 { font-size: 1.25rem; letter-spacing: -.01em; }
+h2 { font-size: 1rem; display: flex; align-items: center; gap: .5rem; }
+code { font-family: var(--mono); font-size: .875em; }
+
+.top {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem;
+  padding: 1rem clamp(1rem, 4vw, 2.5rem);
+  border-bottom: 1px solid var(--line);
+}
+.me { margin: 0 auto 0 0; color: var(--muted); display: flex; align-items: center; gap: .5rem; }
+.dot {
+  width: .75rem; height: .75rem; border-radius: 50%;
+  background: hsl(var(--h, 220) 85% 60%);
+  flex: none;
+}
+
+main {
+  display: grid; gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  padding: clamp(1rem, 4vw, 2.5rem);
+  max-width: 1180px; margin: 0 auto;
+}
+@media (min-width: 900px) { main { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
+
+.app { display: grid; gap: 1rem; align-content: start; }
+.panel {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 12px; padding: 1.1rem 1.25rem;
+  display: grid; gap: .75rem;
+  transition: background .25s, border-color .25s;
+}
+.hint { margin: 0; color: var(--muted); font-size: .875rem; }
+.status { margin: 0; font-weight: 600; }
+.row { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+
+button, input {
+  font: inherit; color: inherit;
+  border-radius: 8px; border: 1px solid var(--line);
+  padding: .55rem .9rem; background: var(--surface);
+}
+button { cursor: pointer; background: var(--accent); color: var(--accent-text); border-color: transparent; font-weight: 600; }
+button.ghost { background: transparent; color: var(--text); border-color: var(--line); font-weight: 500; }
+button:hover { filter: brightness(1.08); }
+input { min-width: 0; flex: 1 1 10rem; }
+:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+.badge {
+  font: 600 .75rem var(--mono);
+  background: var(--violet); color: #fff;
+  border-radius: 999px; padding: .1rem .5rem;
+}
+.cart { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; color: var(--muted); }
+.cart:empty::before { content: "Cart is empty. Add an item and check the other tab."; font-size: .875rem; }
+
+.log-wrap { display: grid; gap: .5rem; align-content: start; }
+.log {
+  list-style: none; margin: .25rem 0 0; padding: .75rem;
+  background: var(--log-bg); border: 1px solid var(--line); border-radius: 12px;
+  font: .8125rem/1.6 var(--mono);
+  height: min(60vh, 28rem); overflow: auto;
+  display: flex; flex-direction: column; gap: .125rem;
+}
+.log:empty::before { content: "Waiting for messages. Open a second tab and click something."; color: var(--muted); }
+.log li { display: flex; gap: .6rem; align-items: baseline; min-width: 0; }
+.log .dir { flex: none; width: 4.5rem; color: var(--muted); }
+.log li.in .dir { color: var(--accent); }
+.log li.out .dir { color: var(--violet); }
+.log .type { flex: none; font-weight: 600; }
+.log .payload { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.log li.fresh { animation: flash 1.2s ease-out; }
+@keyframes flash { from { background: color-mix(in srgb, var(--accent) 30%, transparent); } to { background: transparent; } }
+
+@media (prefers-reduced-motion: reduce) {
+  body, .panel { transition: none; }
+  .log li.fresh { animation: none; }
+}

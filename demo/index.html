@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>tab-sync demo</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>tab-sync</h1>
+    <p class="me" title="Each tab gets its own color">
+      <span class="dot" id="me-dot"></span>
+      This tab: <code id="me-id"></code>
+    </p>
+    <button class="ghost" id="open-tab" type="button">Open another tab</button>
+  </header>
+
+  <main>
+    <section class="app" aria-label="Demo app">
+      <article class="panel">
+        <h2>Theme</h2>
+        <p class="hint">Switch it here, watch every other tab follow.</p>
+        <button id="toggle-theme" type="button">Switch to <span id="next-theme"></span> mode</button>
+      </article>
+
+      <article class="panel">
+        <h2>Cart <span class="badge" id="cart-count">0</span></h2>
+        <ul id="cart-list" class="cart"></ul>
+        <div class="row">
+          <button data-item="Keyboard" class="add" type="button">Add keyboard</button>
+          <button data-item="Monitor" class="add" type="button">Add monitor</button>
+          <button data-item="Mouse" class="add" type="button">Add mouse</button>
+          <button id="clear-cart" class="ghost" type="button">Clear cart</button>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2>Session</h2>
+        <p id="session-status" class="status"></p>
+        <div class="row" id="signin-row">
+          <label class="sr" for="username">Name</label>
+          <input id="username" placeholder="Your name" autocomplete="off">
+          <button id="signin" type="button">Sign in</button>
+        </div>
+        <button id="signout" type="button" hidden>Sign out everywhere</button>
+        <p class="hint">This only syncs what the interface shows. The server still has to verify real sessions.</p>
+      </article>
+    </section>
+
+    <section class="log-wrap" aria-label="Channel traffic">
+      <h2>Channel traffic</h2>
+      <p class="hint">Every message crossing the <code>kero-demo</code> channel. Dot color shows which tab sent it.</p>
+      <ol id="log" class="log" aria-live="polite"></ol>
+    </section>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

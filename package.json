@@ -1,0 +1,28 @@
+{
+  "name": "tab-sync",
+  "version": "1.0.0",
+  "description": "Tiny, zero-dependency cross-tab state sync built on the native BroadcastChannel API. No backend, no WebSockets.",
+  "type": "module",
+  "main": "./src/tab-sync.js",
+  "module": "./src/tab-sync.js",
+  "types": "./src/tab-sync.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/tab-sync.d.ts",
+      "import": "./src/tab-sync.js"
+    }
+  },
+  "files": ["src", "README.md", "LICENSE"],
+  "sideEffects": false,
+  "scripts": {
+    "start": "npx --yes serve . -l 3000",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=18" },
+  "keywords": ["broadcastchannel", "cross-tab", "sync", "javascript", "frontend", "state", "browser-tabs"],
+  "author": "Kero Codes",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/eng-kerolos-adel/tab-sync.git" },
+  "bugs": { "url": "https://github.com/eng-kerolos-adel/tab-sync/issues" },
+  "homepage": "https://github.com/eng-kerolos-adel/tab-sync#readme"
+}
